@@ -68,6 +68,7 @@ export default function App() {
         refs.prevDispatch.current = dispatch;
         refs.prevDisplayingFavorites.current = isDisplayingFavorites;
         refs.prevGenreId.current = genreId;
+        refs.prevInitialState.current = initialState;
     }, [searchTerm, verticalScroll, dispatch, isDisplayingFavorites, genreId, initialState]);
 
     useEffect(() => {

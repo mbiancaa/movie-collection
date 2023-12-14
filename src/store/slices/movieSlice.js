@@ -28,7 +28,9 @@ const movieSlice = createSlice({
             state.page += 1;
             state.error = null;
         },
-        setInitialState: (state) => state.initialState = !state.initialState,
+        setInitialState: (state) => {
+            state.initialState = !state.initialState
+        },
         resetState: (state) => {
             movieSlice.caseReducers.resetMovies(state);
             state.isDisplayingFavorites = false;
@@ -38,7 +40,9 @@ const movieSlice = createSlice({
             state.page = 1;
             state.error = false;
         },
-        resetMovies: (state) => state.movies = [],
+        resetMovies: (state) => {
+            state.movies = []
+        },
         handleError: (state, action) => {
             state.error = action.payload;
         },
