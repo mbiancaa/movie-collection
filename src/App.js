@@ -19,7 +19,7 @@ export default function App() {
 
     const dispatch = useDispatch();
 
-    const { page, error, isDisplayingFavorites, genreId } = useSelector((state) => state.movie);
+    const { page, error, isDisplayingFavorites, genreId, initialState } = useSelector((state) => state.movie);
     const searchTerm = useSelector(selectSearchTerm);
 
     const refs = {
@@ -28,7 +28,8 @@ export default function App() {
         prevVerticalScroll: useRef(verticalScroll),
         prevDispatch: useRef(dispatch),
         prevDisplayingFavorites: useRef(isDisplayingFavorites),
-        prevGenreId: useRef(genreId)
+        prevGenreId: useRef(genreId),
+        prevInitialState: useRef(initialState),
     };
 
     const updateScroll =  () => {
@@ -48,20 +49,17 @@ export default function App() {
 
     useEffect(() => {
         if (!refs.isMounted.current) return;
+        const shouldUpdateMovies =
+            (refs.prevSearchTerm.current !== searchTerm ||
+                refs.prevVerticalScroll.current !== verticalScroll ||
+                refs.prevDispatch.current !== dispatch ||
+                refs.prevGenreId.current !== genreId ||
+                refs.prevInitialState.current !== initialState ||
+                (refs.prevDisplayingFavorites.current !== isDisplayingFavorites &&
+                    refs.prevDisplayingFavorites.current)) &&
+            !isDisplayingFavorites;
 
-        const searchTermChanged = refs.prevSearchTerm.current !== searchTerm;
-        const verticalScrollChanged = refs.prevVerticalScroll.current !== verticalScroll;
-        const dispatchChanged = refs.prevDispatch.current !== dispatch;
-        const isDisplayingFavoritesChanged = refs.prevDisplayingFavorites.current !== isDisplayingFavorites;
-        const genreIdChanged = refs.prevGenreId.current !== genreId;
-
-        if (
-            searchTermChanged ||
-            verticalScrollChanged ||
-            dispatchChanged ||
-            genreIdChanged ||
-            ( isDisplayingFavoritesChanged && refs.prevDisplayingFavorites.current )
-        ) {
+        if (shouldUpdateMovies) {
             updateMovies();
         }
 
@@ -70,7 +68,7 @@ export default function App() {
         refs.prevDispatch.current = dispatch;
         refs.prevDisplayingFavorites.current = isDisplayingFavorites;
         refs.prevGenreId.current = genreId;
-    }, [searchTerm, verticalScroll, dispatch, isDisplayingFavorites, genreId]);
+    }, [searchTerm, verticalScroll, dispatch, isDisplayingFavorites, genreId, initialState]);
 
     useEffect(() => {
         if (!refs.isMounted.current) {

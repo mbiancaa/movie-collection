@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectGenreId, selectGenres } from "../../store/selectors/movieSelectors";
-import { setGenreId, toggleGenrePopup } from "../../store/slices/movieSlice";
+import { setGenreId, setInitialState, toggleGenrePopup } from "../../store/slices/movieSlice";
 
 export default function GenresPopup() {
 
@@ -10,6 +10,7 @@ export default function GenresPopup() {
 
     const setMovieGenre = (genreId) => {
         dispatch(setGenreId(genreId));
+        dispatch(setInitialState());
         dispatch(toggleGenrePopup);
     }
 

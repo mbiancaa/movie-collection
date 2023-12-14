@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const movieSlice = createSlice({
     name: 'movie',
     initialState: {
+        initialState: true,
         movies: [],
         page: 1,
         error: null,
@@ -15,6 +16,7 @@ const movieSlice = createSlice({
     reducers: {
         loadMovies: (state, action) => {
             if (state.page === 1) movieSlice.caseReducers.resetMovies(state);
+
             const newMovies = action.payload.map((movie) => {
                 const isFavorite = JSON.parse(sessionStorage.getItem('favoriteMovies'))?.find(item => item.id === movie.id) || false;
                 return {
@@ -26,12 +28,14 @@ const movieSlice = createSlice({
             state.page += 1;
             state.error = null;
         },
+        setInitialState: (state) => state.initialState = !state.initialState,
         resetState: (state) => {
+            movieSlice.caseReducers.resetMovies(state);
             state.isDisplayingFavorites = false;
             state.isDisplayingGenresPopup = false;
             state.searchTerm = '';
+            state.genreId = null;
             state.page = 1;
-            state.movies = [];
             state.error = false;
         },
         resetMovies: (state) => state.movies = [],
@@ -86,11 +90,12 @@ const movieSlice = createSlice({
         setSearch: (state, action) => {
             movieSlice.caseReducers.resetState(state);
             state.searchTerm = action.payload;
-        }
+        },
     },
 });
 
 export const {
+    setInitialState,
     resetState,
     loadMovies,
     handleError,

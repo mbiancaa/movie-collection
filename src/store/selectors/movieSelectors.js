@@ -13,3 +13,4 @@ export const selectGenres = (state) => state.movie.genres;
 export const selectGenreId = (state) => state.movie.genreId;
 export const selectIsDisplayingGenresPopup = (state) => state.movie.isDisplayingGenresPopup;
 export const selectIsDisplayingFavorites = (state) => state.movie.isDisplayingFavorites;
+export const selectInitialState = (state) => state.movie.initialState;

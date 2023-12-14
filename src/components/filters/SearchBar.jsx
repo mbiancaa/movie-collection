@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { setSearch } from "../../store/slices/movieSlice";
+import { setSearch, setInitialState } from "../../store/slices/movieSlice";
 import { debounce } from 'lodash';
 import { SEARCH_DEBOUNCE_TIME } from "../../constants";
 import { selectSearchTerm } from "../../store/selectors/movieSelectors";
@@ -12,9 +12,16 @@ export default function SearchBar() {
     const isMounted = useRef(false);
     const dispatch = useDispatch();
 
-    const dispatchSearch = debounce((searchTerm) => {
-        dispatch(setSearch(searchTerm));
-    }, SEARCH_DEBOUNCE_TIME);
+    const dispatchSearch = useRef(debounce((term) => {
+        dispatch(setInitialState());
+        dispatch(setSearch(term));
+    }, SEARCH_DEBOUNCE_TIME)).current;
+
+    const handleChange = (event) => {
+        const newSearchTerm = event.target.value;
+        setSearchTermState(newSearchTerm);
+        dispatchSearch(newSearchTerm);
+    };
 
     useEffect(() => {
         if (!isMounted.current) {
@@ -23,12 +30,6 @@ export default function SearchBar() {
         }
         setSearchTermState(searchTerm);
     }, [searchTerm]);
-
-    const handleChange = (event) => {
-        const newSearchTerm = event.target.value;
-        setSearchTermState(newSearchTerm);
-        dispatchSearch(newSearchTerm);
-    };
 
     const searchMovieByKeyword = (event) => {
         event.preventDefault();
