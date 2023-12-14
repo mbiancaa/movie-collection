@@ -1,3 +1,13 @@
+:root {
+  --actions-color: #f74e4e;
+  --box-shadow-color: rgba(0, 0, 0, 0.16);
+  --typography-color: #323030;
+}
+
+* {
+  color: var(--typography-color);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +20,279 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.LoadingMovies {
+  opacity: .4;
+}
+
+.MovieListContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 15px 10px;
+}
+
+.MovieItemContainer {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 3px 6px var(--box-shadow-color);
+}
+
+.MoviePoster {
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  object-fit: cover;
+}
+
+.MovieItemFooter {
+  position: absolute;
+  background: #fff;
+  bottom: 0;
+  width: calc(100% - 30px);
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.FavoriteMovieButton img {
+  width: 35px;
+  height: auto;
+  cursor: pointer;
+}
+
+.FavoriteMovieButton:hover img {
+  width: 45px;
+  height: auto;
+}
+
+.FilterButtons {
+  display: flex;
+  align-items: center;
+  gap: 15px 0;
+  margin: 15px 0;
+  padding: 0 10px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.FilterButtonContainer {
+  width: calc(50% - 10px);
+  position: relative;
+}
+
+.FilterButtonContainer.Reset {
+  width: 100%;
+}
+
+.FilterButton {
+  padding: 15px 20px;
+  box-shadow: 0 1px 3px var(--box-shadow-color);
+  border-radius: 12px;
+  border: 4px solid transparent;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.FilterButton.active {
+  border: 4px solid var(--actions-color);
+  color: var(--actions-color);
+}
+
+.MovieItemInfoCol {
+  display: block;
+  text-align: left;
+  max-width: calc(100% - 45px);
+}
+
+.ReleaseDate {
+  display: none;
+}
+
+.MovieItemInfo.Title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: bold;
+}
+
+.MovieItemFooter:hover .ReleaseDate {
+  display: block;
+  margin: 0 0 10px 0;
+  text-align: left;
+  font-size: 12px;
+  width: 100%;
+}
+
+.MovieItemFooter:hover .Title {
+  overflow: visible;
+  word-break: break-word;
+  text-overflow: unset;
+  white-space: unset;
+}
+
+.MovieLinkButton {
+  display: none;
+  width: 100%;
+  text-align: left;
+}
+
+.MovieItemFooter:hover .MovieLinkButton {
+  display: block;
+}
+
+.MovieLinkButton a {
+  text-decoration: none;
+  color: #fff;
+  background: var(--actions-color);
+  border-radius: 12px;
+  padding: 12px;
+  display: block;
+  width: fit-content;
+  font-size: 13px;
+}
+
+.SearchForm {
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.SearchInput {
+  outline: none;
+  border: none;
+  border-radius: 30px;
+  width: 100%;
+  padding: 15px 20px;
+  box-shadow: 0 2px 6px var(--box-shadow-color);
+}
+
+.SearchButton {
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  outline: none;
+  border: none;
+  background: var(--actions-color);
+  height: 45px;
+  border-radius: 0 30px 30px 30px;
+  color: #fff;
+  font-weight: bold;
+  width: 100px;
+  box-shadow: 0 1px 3px var(--box-shadow-color);
+}
+
+.GenresPopup {
+  position: absolute;
+  z-index: 2;
+  background: #fff;
+  width: calc(100% - 8px);
+  left: 0;
+  box-shadow: 0 3px 6px var(--box-shadow-color);
+  top: calc(100% + 15px);
+  border-radius: 12px;
+  border: 4px solid var(--actions-color);
+  padding: 10px 0;
+  max-height: 245px;
+  overflow: scroll;
+  min-width: 180px;
+}
+
+.GenresPopup li {
+  padding: 10px 20px;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  list-style-type: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.GenresPopup li:hover {
+  font-weight: bold;
+  background: #f4e9e9;
+}
+
+.GenresPopup li.active {
+  font-weight: bold;
+  color: var(--typography-color);
+  background: #f4e9e9;
+}
+
+.GenresPopup ul {
+  padding: 0;
+  margin: 0;
+}
+
+@media (min-width: 460px) {
+
+  .FilterButtons{
+    padding: 0 20px;
+    justify-content: unset;
+    gap: 15px;
+    flex-wrap: nowrap;
+  }
+
+  .FilterButtonContainer {
+    width: calc(50% - 40px);
+    max-width: 200px;
+  }
+
+  .MovieListContainer {
+    flex-direction: row;
+    gap: 20px;
+    padding: 20px;
+    flex-wrap: wrap;
+  }
+
+  .MovieItemContainer {
+    width: calc(50% - 10px);
+  }
+
+  .SearchInput {
+    padding: 20px 25px;
+  }
+
+  .SearchForm {
+    padding: 0 20px;
+    margin-bottom: 40px;
+  }
+
+  .SearchButton {
+    height: 55px;
+    width: 155px;
+    right: 20px;
+  }
+
+}
+
+@media (min-width: 760px) {
+
+  .MovieItemContainer {
+    width: calc(33% - 12px);
+  }
+
+}
+
+@media (min-width: 900px) {
+
+  .MovieItemContainer {
+    width: calc(25% - 15px);
+  }
+
+}
+
+@media (min-width: 1200px) {
+
+  .MovieItemContainer {
+    width: calc(20% - 17px);
+  }
+
 }
