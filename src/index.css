@@ -49,6 +49,12 @@ code {
   object-fit: cover;
 }
 
+.MovieItemContainer:hover .MovieItemFooter {
+  height: auto;
+  padding: 15px 15px 25px 15px;
+  animation: slide 0.8s ease 1;
+}
+
 .MovieItemFooter {
   position: absolute;
   background: #fff;
@@ -56,20 +62,47 @@ code {
   width: calc(100% - 30px);
   display: flex;
   align-items: center;
-  padding: 15px;
+  padding: 0 15px;
   justify-content: space-between;
   flex-wrap: wrap;
+  height: 80px;
+  transition: all 0.3s ease;
 }
 
-.FavoriteMovieButton img {
+@keyframes slide {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.HeartIcon {
   width: 35px;
   height: auto;
   cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-.FavoriteMovieButton:hover img {
-  width: 45px;
-  height: auto;
+.FavoriteMovieButton.active .HeartIcon {
+  animation: pulsate 0.6s ease 1;
+}
+
+.FavoriteMovieButton.isFavorite:hover {
+  transform: scale(1.2);
+  transition: transform 0.3s ease;
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(0.7);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .FilterButtons {
@@ -88,7 +121,12 @@ code {
 }
 
 .FilterButtonContainer.Reset {
-  width: 100%;
+   width: 100%;
+}
+
+.inactive {
+  opacity: 0.7;
+  pointer-events: none;
 }
 
 .FilterButton {
@@ -122,7 +160,7 @@ code {
   font-weight: bold;
 }
 
-.MovieItemFooter:hover .ReleaseDate {
+.MovieItemContainer:hover .ReleaseDate {
   display: block;
   margin: 0 0 10px 0;
   text-align: left;
@@ -130,7 +168,7 @@ code {
   width: 100%;
 }
 
-.MovieItemFooter:hover .Title {
+.MovieItemContainer:hover .Title {
   overflow: visible;
   word-break: break-word;
   text-overflow: unset;
@@ -143,7 +181,7 @@ code {
   text-align: left;
 }
 
-.MovieItemFooter:hover .MovieLinkButton {
+.MovieItemContainer:hover .MovieLinkButton {
   display: block;
 }
 
