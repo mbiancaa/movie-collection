@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/movie-collection/static/css/main.b709ae83.css",
+    "main.js": "/movie-collection/static/js/main.7e22d7e4.js",
+    "static/js/787.12564ebb.chunk.js": "/movie-collection/static/js/787.12564ebb.chunk.js",
+    "static/media/empty_heart.png": "/movie-collection/static/media/empty_heart.ca89e31252ffc10b861c.png",
+    "index.html": "/movie-collection/index.html",
+    "main.b709ae83.css.map": "/movie-collection/static/css/main.b709ae83.css.map",
+    "main.7e22d7e4.js.map": "/movie-collection/static/js/main.7e22d7e4.js.map",
+    "787.12564ebb.chunk.js.map": "/movie-collection/static/js/787.12564ebb.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b709ae83.css",
+    "static/js/main.7e22d7e4.js"
+  ]
+}
